@@ -73,14 +73,14 @@ var simplifyPath = function (path) {
     for (i = 0; i < len; i++) {
         let item = arr[i];
         if (item && item !== '.') {
-            if (item === '..' && res) {
+            if (item === '..') {
                 res.pop();
             } else {
                 res.push(item);
             }
         }
     }
-    return len === 0 ? '' : '/' + res.join('/');
+    return '/' + res.join('/');
 };
 // @lc code=end
 

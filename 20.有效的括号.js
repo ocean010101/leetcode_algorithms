@@ -62,31 +62,23 @@
  */
 var isValid = function (s) {
     let left = [], i, len = s.length;
+    const objmap = {
+        '[': ']',
+        '(': ')',
+        '{': '}',
+    };
+
     for (i = 0; i < len; i++) {
         let item = s[i];
-        if (item === '(' || item === '[' || item === '{') {
+        if (item in objmap) {
             left.push(item);
-        } else if (item === ')') {
-            if (left[left.length - 1] !== '(') {
+        } else {
+            if (item !== objmap[left.pop()]) {
                 return false;
-            } else {
-                left.pop();
-            }
-        } else if (item === ']') {
-            if (left[left.length - 1] !== '[') {
-                return false;
-            } else {
-                left.pop();
-            }
-        } else if (item === '}') {
-            if (left[left.length - 1] !== '{') {
-                return false;
-            } else {
-                left.pop();
             }
         }
     }
-    return left.length === 0;
+    return !left.length;
 };
 // @lc code=end
 

@@ -38,15 +38,22 @@
  * @return {ListNode}
  */
 var reverseList = function (head) {
-    let cur = head, prev = null;
-    while (cur) {
-        let nextTmp = cur.next;//保存当前节点对下一个节点的引用
-        cur.next = prev;// 当前节点的引用指向prev
+    //1. 迭代
+    // let cur = head, prev = null;
+    // while (cur) {
+    //     let nextTmp = cur.next;//保存当前节点对下一个节点的引用
+    //     cur.next = prev;// 当前节点的引用指向prev
 
-        prev = cur;//prev指向当前节点
-        cur = nextTmp;//跳到下一个节点
-    }
-    return prev;
+    //     prev = cur;//prev指向当前节点
+    //     cur = nextTmp;//跳到下一个节点
+    // }
+    // return prev;
+    //2. 递归
+    if (head == null || head.next == null) return head;
+    let ret = reverseList(head.next);
+    head.next.next = head;
+    head.next = null;
+    return ret;
 };
 // @lc code=end
 

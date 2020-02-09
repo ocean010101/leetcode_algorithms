@@ -46,6 +46,7 @@ var reverseList = function (head) {
 
     //     prev = cur;//prev指向当前节点
     //     cur = nextTmp;//跳到下一个节点
+    //     [cur.next, prev, cur] = [prev, cur, cur.next];
     // }
     // return prev;
     //2. 递归

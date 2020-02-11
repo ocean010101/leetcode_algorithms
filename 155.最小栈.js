@@ -33,7 +33,7 @@
  * minStack.pop();
  * minStack.top();      --> 返回 0.
  * minStack.getMin();   --> 返回 -2.
- * 
+ *  
  * 
  */
 
@@ -43,7 +43,8 @@
  */
 var MinStack = function () {
     this.stack = [];
-    this.length = 0;
+    this.min = [];
+    // this.length = 0;
 };
 
 /** 
@@ -52,36 +53,36 @@ var MinStack = function () {
  */
 MinStack.prototype.push = function (x) {
     this.stack.unshift(x);
-    this.length++;
+    let minLen = this.min.length;
+    if (minLen == 0) {
+        this.min.push(x);
+    } else {
+        let minVal = this.min[minLen - 1] > x ? x : this.min[minLen - 1];
+        this.min.push(minVal);
+    }
 };
 
 /**
  * @return {void}
  */
 MinStack.prototype.pop = function () {
+    this.min.pop();
+
     this.stack.shift();
-    this.length--;
 };
 
 /**
  * @return {number}
  */
 MinStack.prototype.top = function () {
-    return this.length >= 1 ? this.stack[0] : null;
+    return typeof (this.stack[0]) != 'undefined' ? this.stack[0] : null;
 };
 
 /**
  * @return {number}
  */
 MinStack.prototype.getMin = function () {
-    let min = this.length >= 1 ? this.stack[0] : 0;
-    for (let i = 0; i < this.length; i++) {
-        let item = this.stack[i];
-        if (min > item) {
-            min = item;
-        }
-    }
-    return min;
+    return this.min[this.min.length - 1];
 };
 
 /**

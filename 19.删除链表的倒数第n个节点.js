@@ -51,28 +51,46 @@ var removeNthFromEnd = function (head, n) {
     }
     //链表长度为len， 删除第len-n+1个元素
     //获取链表长度
-    let len = 0, p = head;
-    while (p != null) {
-        len++;
-        p = p.next;
-    }
-    len -= n;
+    // let len = 0, p = head;
+    // while (p != null) {
+    //     len++;
+    //     p = p.next;
+    // }
+    // len -= n;
+
+    // let ele = {
+    //     next: head
+    // };
+    // p = ele; // 给链表添加一个伪装的头部
+
+    // let i = 0;
+    // while (p.next) {
+    //     if (i == len) {
+    //         p.next = p.next.next;
+    //     } else {
+    //         p = p.next;
+    //     }
+    //     i++;
+    // }
+    // return ele.next;
+
 
     let ele = {
         next: head
     };
-    p = ele; // 给链表添加一个伪装的头部
-
-    let i = 0;
-    while (p.next) {
-        if (i == len) {
-            p.next = p.next.next;
-        } else {
-            p = p.next;
-        }
-        i++;
+    let first = ele, second = ele;
+    for (let i = 1; i <= n + 1; i++) {
+        first = first.next;
     }
+    // Move first to the end, maintaining the gap
+    while (first != null) {
+        first = first.next;
+        second = second.next;
+    }
+    second.next = second.next.next;
     return ele.next;
+
+
 };
 // @lc code=end
 

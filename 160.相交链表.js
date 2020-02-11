@@ -103,21 +103,31 @@ var getIntersectionNode = function (headA, headB) {
     //     }
     //     pA = pA.next;
     // }
+    // return null;
 
     //哈希表法
-    let pA = headA; cache = new Set();;
-    while (pA) {
-        cache.add(pA)
-        pA = pA.next;
+    // let pA = headA; cache = new Set();;
+    // while (pA) {
+    //     cache.add(pA)
+    //     pA = pA.next;
+    // }
+    // let pB = headB;
+    // while (pB) {
+    //     if (cache.has(pB)) {
+    //         return pB;
+    //     }
+    //     pB = pB.next;
+    // }
+    // return null;
+
+    //双指针法
+    let pA = headA, pB = headB;
+    while (pA != pB) {
+        pA = pA ? pA.next : headB;
+        pB = pB ? pB.next : headA;
     }
-    let pB = headB;
-    while (pB) {
-        if (cache.has(pB)) {
-            return pB;
-        }
-        pB = pB.next;
-    }
-    return null;
+    return pA;
+
 };
 // @lc code=end
 

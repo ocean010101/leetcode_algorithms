@@ -91,16 +91,31 @@ var getIntersectionNode = function (headA, headB) {
     if (headA == null || headB == null) {
         return null;
     }
-    let pA = headA;
+    // 暴力法
+    // let pA = headA;
+    // while (pA) {
+    //     let pB = headB;
+    //     while (pB) {
+    //         if (pA == pB) {
+    //             return pA;
+    //         }
+    //         pB = pB.next;
+    //     }
+    //     pA = pA.next;
+    // }
+
+    //哈希表法
+    let pA = headA; cache = new Set();;
     while (pA) {
-        let pB = headB;
-        while (pB) {
-            if (pA == pB) {
-                return pA;
-            }
-            pB = pB.next;
-        }
+        cache.add(pA)
         pA = pA.next;
+    }
+    let pB = headB;
+    while (pB) {
+        if (cache.has(pB)) {
+            return pB;
+        }
+        pB = pB.next;
     }
     return null;
 };

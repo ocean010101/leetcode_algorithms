@@ -41,7 +41,12 @@
  */
 var isPowerOfTwo = function (n) {
     // return Number.isInteger(Math.log2(n));
-    return Math.log2(n) % 1 === 0;
+    // return Math.log2(n) % 1 === 0;
+
+    if (n <= 0) {
+        return false;
+    }
+    return (n & (n - 1)) == 0;
 };
 // @lc code=end
 

@@ -40,7 +40,8 @@
  * @return {boolean}
  */
 var isPowerOfTwo = function (n) {
-    return Number.isInteger(Math.log2(n));
+    // return Number.isInteger(Math.log2(n));
+    return Math.log2(n) % 1 === 0;
 };
 // @lc code=end
 

@@ -42,37 +42,64 @@
  * @return {ListNode}
  */
 var addTwoNumbers = function (l1, l2) {
-    if (l1 == null) {
-        return l2;
-    }
-    if (l2 == null) {
-        return l1;
-    }
+    // if (l1 == null) {
+    //     return l2;
+    // }
+    // if (l2 == null) {
+    //     return l1;
+    // }
 
-    let ele = {
+    // let ele = {
+    //     next: null
+    // }, ret = ele;
+    // let num2 = 0, num1 = 0;
+    // while (l1 != null || l2 != null) {
+    //     let val1 = l1 != null ? l1.val : 0,
+    //         val2 = l2 != null ? l2.val : 0,
+    //         sum = val1 + val2 + num2;
+
+    //     num2 = sum >= 10 ? 1 : 0;
+    //     num1 = sum % 10;
+    //     ele.next = new ListNode(num1);
+    //     ele = ele.next;
+
+    //     if (l1 != null) {
+    //         l1 = l1.next;
+    //     }
+    //     if (l2 != null) {
+    //         l2 = l2.next;
+    //     }
+    // }
+
+    // if (num2 != 0) {
+    //     ele.next = new ListNode(num2);
+    // }
+    // return ret.next;
+
+
+    let curr = {
         next: null
-    }, ret = ele;
-    let num2 = 0, num1 = 0;
-    while (l1 != null || l2 != null) {
-        let val1 = l1 != null ? l1.val : 0,
-            val2 = l2 != null ? l2.val : 0,
-            sum = val1 + val2 + num2;
+    }, ret = curr;
+    let p1 = l1, p2 = l2, carry = 0;
+    while (p1 != null || p2 != null) {
+        let val1 = p1 != null ? p1.val : 0,
+            va12 = p2 != null ? p2.val : 0,
+            sum = val1 + va12 + carry;
 
-        num2 = sum >= 10 ? 1 : 0;
-        num1 = sum % 10;
-        ele.next = new ListNode(num1);
-        ele = ele.next;
+        carry = sum >= 10 ? 1 : 0;
+        curr.next = new ListNode(sum % 10);
+        curr = curr.next;
 
-        if (l1 != null) {
-            l1 = l1.next;
+        if (p1 != null) {
+            p1 = p1.next;
         }
-        if (l2 != null) {
-            l2 = l2.next;
+        if (p2 != null) {
+            p2 = p2.next;
         }
     }
 
-    if (num2 != 0) {
-        ele.next = new ListNode(num2);
+    if (carry > 0) {
+        curr.next = new ListNode(carry);
     }
     return ret.next;
 };

@@ -41,19 +41,32 @@
  */
 var containsDuplicate = function (nums) {
     //hash表解法
-    let len = nums.length, numMap = {};
+    // let len = nums.length, numMap = {};
+    // if (len <= 1) {
+    //     return false;
+    // }
+    // for (let i = 0; i < len; i++) {
+    //     if (typeof (numMap[nums[i]]) != 'undefined') {
+    //         return true;
+    //     } else {
+    //         numMap[nums[i]] = 1;
+    //     }
+    // }
+    // return false;
+
+    let len = nums.length;
     if (len <= 1) {
         return false;
     }
-    for (let i = 0; i < len; i++) {
-        if (typeof (numMap[nums[i]]) != 'undefined') {
+    let i, numSet = new Set();
+    for (i = 0; i < len; i++) {
+        if (numSet.has(nums[i])) {
             return true;
         } else {
-            numMap[nums[i]] = 1;
+            numSet.add(nums[i]);
         }
     }
     return false;
-    //位运算：按位异或
 
 };
 // @lc code=end

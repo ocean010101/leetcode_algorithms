@@ -46,8 +46,15 @@
  * @return {number}
  */
 var reverse = function (x) {
-    let ret = (Math.abs(x) + '').split('').reverse().join('') - 0;
-    ret = (x < 0) ? (0 - ret) : ret;
+    // let ret = (Math.abs(x) + '').split('').reverse().join('') - 0;
+    // ret = (x < 0) ? (0 - ret) : ret;
+    // return (ret >= -2147483648 && ret <= 2147483647) ? ret : 0;
+
+    let ret = 0;
+    while (x != 0) {
+        ret = ret * 10 + x % 10;
+        x = x > 0 ? Math.floor(x / 10) : Math.ceil(x / 10);
+    }
     return (ret >= -2147483648 && ret <= 2147483647) ? ret : 0;
 };
 // @lc code=end

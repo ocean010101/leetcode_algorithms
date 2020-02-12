@@ -68,15 +68,24 @@ var containsDuplicate = function (nums) {
     // }
     // return false;
 
-    let arr = nums;
-    arr.sort();
-    for (let i = 0; i < arr.length - 1; ++i) {
-        if (arr[i] == arr[i + 1]) {
-            return true;
+    // let arr = nums;
+    // arr.sort();
+    // for (let i = 0; i < arr.length - 1; ++i) {
+    //     if (arr[i] == arr[i + 1]) {
+    //         return true;
+    //     }
+    // }
+    // return false;
+
+
+    for (let i = 0; i < nums.length; ++i) {
+        for (let j = 0; j < i; ++j) {
+            if (nums[j] == nums[i]) {
+                return true;
+            }
         }
     }
     return false;
-
 };
 // @lc code=end
 

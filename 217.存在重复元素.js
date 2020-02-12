@@ -54,16 +54,25 @@ var containsDuplicate = function (nums) {
     // }
     // return false;
 
-    let len = nums.length;
-    if (len <= 1) {
-        return false;
-    }
-    let i, numSet = new Set();
-    for (i = 0; i < len; i++) {
-        if (numSet.has(nums[i])) {
+    // let len = nums.length;
+    // if (len <= 1) {
+    //     return false;
+    // }
+    // let i, numSet = new Set();
+    // for (i = 0; i < len; i++) {
+    //     if (numSet.has(nums[i])) {
+    //         return true;
+    //     } else {
+    //         numSet.add(nums[i]);
+    //     }
+    // }
+    // return false;
+
+    let arr = nums;
+    arr.sort();
+    for (let i = 0; i < arr.length - 1; ++i) {
+        if (arr[i] == arr[i + 1]) {
             return true;
-        } else {
-            numSet.add(nums[i]);
         }
     }
     return false;

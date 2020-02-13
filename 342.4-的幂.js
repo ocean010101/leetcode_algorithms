@@ -36,7 +36,7 @@
  * @param {number} num
  * @return {boolean}
  */
-var isPowerOfFour = function (num) {
+var isPowerOfFour1 = function (num) {
     if (num == 0) {
         return false;
     }
@@ -44,6 +44,53 @@ var isPowerOfFour = function (num) {
         num /= 4;
     }
     return num == 1;
+};
+/*
+    Accepted
+    1060/1060 cases passed (80 ms)
+    Your runtime beats 76 % of javascript submissions
+    Your memory usage beats 90.06 % of javascript submissions (35.4 MB)
+
+*/
+var isPowerOfFour2 = function (num) {
+    //提前计算所有可能答案，32 位整数， 最大 4 的幂次为 15, 则有16种可能
+    let i, arr = [];
+    for (i = 0; i < 16; i++) {
+        arr.push(Math.pow(4, i));
+    }
+
+    return arr.includes(num);
+
+};
+
+/*
+Accepted
+1060/1060 cases passed (84 ms)
+Your runtime beats 61.45 % of javascript submissions
+Your memory usage beats 95.58 % of javascript submissions (35.3 MB)
+*/
+var isPowerOfFour3 = function (num) {
+    return (num > 0) && (Math.log(num) / Math.log(2) % 2 == 0);
+};
+
+/*
+Accepted
+1060/1060 cases passed (80 ms)
+Your runtime beats 76 % of javascript submissions
+Your memory usage beats 54.14 % of javascript submissions (35.5 MB)
+*/
+var isPowerOfFour4 = function (num) {
+    return (num > 0) && ((num & (num - 1)) == 0) && ((num & 0xaaaaaaaa) == 0);
+};
+
+/*
+Accepted
+1060/1060 cases passed (80 ms)
+Your runtime beats 76 % of javascript submissions
+Your memory usage beats 94.48 % of javascript submissions (35.3 MB)
+*/
+var isPowerOfFour = function (num) {
+    return num > 0 && (num & (num - 1)) == 0 && (num % 3 == 1)
 };
 // @lc code=end
 

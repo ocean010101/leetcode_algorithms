@@ -39,14 +39,36 @@
  * @param {number} n
  * @return {boolean}
  */
-var isPowerOfTwo = function (n) {
-    // return Number.isInteger(Math.log2(n));
-    // return Math.log2(n) % 1 === 0;
+//时间复杂度为O(logN)
+var isPowerOfTwo1 = function (n) {
+    if (n == 0) {
+        return false;
+    }
+    while (n % 2 == 0) {
+        n /= 2;
+    }
+    return n == 1;
+};
 
+//时间复杂度：O(1)
+//空间复杂度：O(1)
+
+//2的n次方 10， 100，1000
+var isPowerOfTwo2 = function (n) {
     if (n <= 0) {
         return false;
     }
     return (n & (n - 1)) == 0;
 };
+
+//时间复杂度：O(1)
+//空间复杂度：O(1)
+var isPowerOfTwo = function (n) {
+    if (n <= 0) {
+        return false;
+    }
+    return (n & (~n + 1)) == n;
+};
+
 // @lc code=end
 

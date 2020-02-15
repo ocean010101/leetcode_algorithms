@@ -141,6 +141,15 @@ var maxDepth1 = function (root) {
     console.log(`h=${h}`);
     return h; 	 // return depth of the subtree rooted at root
 };
+// var maxDepth = function (root) {
+//     if (!root) {
+//         return 0;
+//     }
+//     let left_depth = maxDepth(root.left);
+//     let right_depth = maxDepth(root.right);
+//     return  Math.max(left_depth, right_depth) + 1;
+// };
+
 /*
 Accepted
 39/39 cases passed (80 ms)
@@ -209,7 +218,6 @@ var maxDepth2 = function (root) {
         queue = arr
     }
     return n
-
 }
 
 // @lc code=end

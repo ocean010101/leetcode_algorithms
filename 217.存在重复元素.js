@@ -39,53 +39,73 @@
  * @param {number[]} nums
  * @return {boolean}
  */
+// var containsDuplicate = function (nums) {
+//hash表解法
+// let len = nums.length, numMap = {};
+// if (len <= 1) {
+//     return false;
+// }
+// for (let i = 0; i < len; i++) {
+//     if (typeof (numMap[nums[i]]) != 'undefined') {
+//         return true;
+//     } else {
+//         numMap[nums[i]] = 1;
+//     }
+// }
+// return false;
+
+
+
+// let arr = nums;
+// arr.sort();
+// for (let i = 0; i < arr.length - 1; ++i) {
+//     if (arr[i] == arr[i + 1]) {
+//         return true;
+//     }
+// }
+// return false;
+
+
+//     for (let i = 0; i < nums.length; ++i) {
+//         for (let j = 0; j < i; ++j) {
+//             if (nums[j] == nums[i]) {
+//                 return true;
+//             }
+//         }
+//     }
+//     return false;
+// };
+/*
+Accepted
+18/18 cases passed (72 ms)
+Your runtime beats 88.3 % of javascript submissions
+Your memory usage beats 60.86 % of javascript submissions (40 MB)
+*/
+var containsDuplicate2 = function (nums) {
+    let mySet = new Set(nums);
+    return mySet.size != nums.length;
+};
+/*
+Accepted
+18/18 cases passed (64 ms)
+Your runtime beats 97.37 % of javascript submissions
+Your memory usage beats 51.79 % of javascript submissions (40.4 MB)
+*/
 var containsDuplicate = function (nums) {
-    //hash表解法
-    // let len = nums.length, numMap = {};
-    // if (len <= 1) {
-    //     return false;
-    // }
-    // for (let i = 0; i < len; i++) {
-    //     if (typeof (numMap[nums[i]]) != 'undefined') {
-    //         return true;
-    //     } else {
-    //         numMap[nums[i]] = 1;
-    //     }
-    // }
-    // return false;
-
-    // let len = nums.length;
-    // if (len <= 1) {
-    //     return false;
-    // }
-    // let i, numSet = new Set();
-    // for (i = 0; i < len; i++) {
-    //     if (numSet.has(nums[i])) {
-    //         return true;
-    //     } else {
-    //         numSet.add(nums[i]);
-    //     }
-    // }
-    // return false;
-
-    // let arr = nums;
-    // arr.sort();
-    // for (let i = 0; i < arr.length - 1; ++i) {
-    //     if (arr[i] == arr[i + 1]) {
-    //         return true;
-    //     }
-    // }
-    // return false;
-
-
-    for (let i = 0; i < nums.length; ++i) {
-        for (let j = 0; j < i; ++j) {
-            if (nums[j] == nums[i]) {
-                return true;
-            }
+    let len = nums.length;
+    if (len <= 1) {
+        return false;
+    }
+    let i, numSet = new Set();
+    for (i = 0; i < len; i++) {
+        if (numSet.has(nums[i])) {
+            return true;
+        } else {
+            numSet.add(nums[i]);
         }
     }
     return false;
 };
+
 // @lc code=end
 

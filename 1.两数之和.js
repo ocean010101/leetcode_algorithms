@@ -10,6 +10,12 @@
  * @param {number} target
  * @return {number[]}
  */
+/*
+Accepted
+29/29 cases passed (64 ms)
+Your runtime beats 89.4 % of javascript submissions
+Your memory usage beats 89.18 % of javascript submissions (34.3 MB)
+*/
 var twoSum = function (nums, target) {
     // var i, j, len = nums.length;
     // for (i = 0; i < len; i++) {
@@ -31,5 +37,22 @@ var twoSum = function (nums, target) {
     }
 };
 
+/*
+Accepted
+29/29 cases passed (64 ms)
+Your runtime beats 89.4 % of javascript submissions
+Your memory usage beats 42.01 % of javascript submissions (34.9 MB)
+*/
+var twoSum1 = function (nums, target) {
+    let myMap = new Map(), i, len = nums.length;
+    for (i = 0; i < len; i++) {
+        let item = nums[i];
+        if (myMap.has(item)) {
+            return [myMap.get(item), i];//[0, 1]
+        } else {
+            myMap.set(target - item, i);//{7:0}
+        }
+    }
+};
 // @lc code=end
 

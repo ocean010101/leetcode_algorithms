@@ -37,12 +37,36 @@
  * @param {number[]} nums
  * @return {number}
  */
-var singleNumber = function (nums) {
+/*
+位操作：异或
+Accepted
+16/16 cases passed (72 ms)
+Your runtime beats 67.71 % of javascript submissions
+Your memory usage beats 95.23 % of javascript submissions (35.2 MB)
+*/
+var singleNumber1 = function (nums) {
     let ret;
     for (let i = 0; i < nums.length; i++) {
         ret ^= nums[i];
     }
     return ret;
+};
+/*
+Accepted
+16/16 cases passed (76 ms)
+Your runtime beats 57.47 % of javascript submissions
+Your memory usage beats 14.31 % of javascript submissions (37.9 MB)
+*/
+var singleNumber = function (nums) {
+    let mySet = new Set();;
+    for (let i = 0; i < nums.length; i++) {
+        if (mySet.has(nums[i])) {
+            mySet.delete(nums[i]);
+        } else {
+            mySet.add(nums[i]);
+        }
+    }
+    return [...mySet][0];
 };
 // @lc code=end
 

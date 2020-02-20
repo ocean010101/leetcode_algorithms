@@ -39,7 +39,13 @@
  * @param {number} k
  * @return {boolean}
  */
-var containsNearbyDuplicate = function (nums, k) {
+/*
+Accepted
+23/23 cases passed (96 ms)
+Your runtime beats 45.82 % of javascript submissions
+Your memory usage beats 24.55 % of javascript submissions (42.3 MB)
+*/
+var containsNearbyDuplicate1 = function (nums, k) {
     //hash
     let i, len = nums.length, numMap = {};
 
@@ -49,6 +55,26 @@ var containsNearbyDuplicate = function (nums, k) {
             return true;
         } else {
             numMap[nums[i]] = i;
+        }
+    }
+    return false;
+};
+/*
+Accepted
+23/23 cases passed (80 ms)
+Your runtime beats 69.39 % of javascript submissions
+Your memory usage beats 44.18 % of javascript submissions (40 MB)
+*/
+
+var containsNearbyDuplicate = function (nums, k) {
+    let i, len = nums.length, numMap = new Map();
+    for (i = 0; i < len; i++) {
+        let item = nums[i];
+        if (numMap.has(item) &&
+            i - numMap.get(item) <= k) {
+            return true;
+        } else {
+            numMap.set(item, i);
         }
     }
     return false;

@@ -52,12 +52,14 @@ Your runtime beats 43.63 % of javascript submissions
 Your memory usage beats 99.46 % of javascript submissions (33.4 MB)
 */
 var helper = function (node, res) {
-    if (node.val) {
+    if (node.val) { //2. update the answer if needed 
         res.push(node.val);
     }
+    //3. left_ans = top_down(root.left, left_params)   
     if (node.left != null) {
         helper(node.left, res);
     }
+    //4. right_ans = top_down(root.right, right_params)
     if (node.right != null) {
         helper(node.right, res);
     }
@@ -65,11 +67,13 @@ var helper = function (node, res) {
 
 
 var preorderTraversal1 = function (root) {
+    //1. return specific value for null node
     if (root == null) {
         return [];
     }
     let res = [];
     helper(root, res);
+    //5. return the answer if needed       
     return res;
 };
 
@@ -110,12 +114,13 @@ Accepted
 Your runtime beats 24.1 % of javascript submissions
 Your memory usage beats 52.97 % of javascript submissions (33.8 MB)
 */
-var preorderTraversal = function (root) {
+var preorderTraversal2 = function (root) {
+    let res = [];
     if (root == null) {
-        return [];
+        return res;
     }
 
-    let curr = root, res = [];
+    let curr = root;
     while (curr != null) {
         if (curr.left == null) {
             res.push(curr.val);
@@ -123,7 +128,7 @@ var preorderTraversal = function (root) {
         } else {//有左子树
             let predecessor = curr.left;
             //左子树的右子树不为空，并且这个右子树与当前节点不同
-            while ((predecessor.right != null) && 
+            while ((predecessor.right != null) &&
                 (predecessor.right != curr)) {
                 predecessor = predecessor.right;
             }
@@ -140,7 +145,32 @@ var preorderTraversal = function (root) {
     }
     return res;
 };
+/*
+Accepted
+68/68 cases passed (48 ms)
+Your runtime beats 99.85 % of javascript submissions
+Your memory usage beats 45.59 % of javascript submissions (33.9 MB)
+*/
+//迭代:深度优先搜索（DFS）
+var preorderTraversal = function (root) {
+    let res = [];
+    if (root == null) {
+        return res;
+    }
 
+    let stack = [root];
+    while (stack.length) {
+        let node = stack.pop();
+        res.push(node.val)
+        if (node.right != null) {
+            stack.push(node.right);
+        }
+        if (node.left != null) {
+            stack.push(node.left);
+        }
+    }
+    return res;
+};
 
 
 // @lc code=end

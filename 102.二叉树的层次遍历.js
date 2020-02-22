@@ -82,23 +82,18 @@ Accepted
 Your runtime beats 64.54 % of javascript submissions
 Your memory usage beats 96.9 % of javascript submissions (34.6 MB)
 */
-/*
-    首先把根节点
-*/
 var levelOrder = function (root) {
-    if (!root) {
-        return []
+    let res = [];
+    if (root == null) {
+        return res;
     }
-    let ret = [], queue = [root]
-    while (queue.length) {
-        let level_size = queue.length
-
-        let current_level = [];
-        //获取当前层级的所有节点存储在current_level 中
-        while (level_size--) {
-            let node = queue.shift()
-
-            current_level.push(node.val)
+    let queue = [root];//初始化队列，因为需要先处理root节点，所以把root节点先入队
+    while (queue.length) { // 队列不为空
+        let level_size = queue.length, //当前队列长度
+            current_level = [];//用来存储当前层级的所有节点
+        while (level_size--) { //按顺序把当前队列中的节点逐个出队
+            let node = queue.shift(); //出队
+            current_level.push(node.val)// 
             if (node.left) {
                 queue.push(node.left)
             }

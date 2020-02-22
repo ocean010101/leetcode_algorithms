@@ -91,18 +91,15 @@ Your runtime beats 95.1 % of javascript submissions
 Your memory usage beats 54.49 % of javascript submissions (33.8 MB)
 */
 var postorderTraversal = function (root) {
+    let res = [];
     if (root == null) {
-        return [];
+        return res;
     }
-    let res = [], stack = [];
-    stack.push(root);
-
-    while (stack.length != 0) {
-        //查找节点
+    
+    let stack = [root];
+    while (stack.length) {
         let node = stack.pop();
-        //添加节点的值到res
         res.unshift(node.val);
-        //3. 跳转到下一个需要查找的树
         if (node.left != null) {
             stack.push(node.left);
         }

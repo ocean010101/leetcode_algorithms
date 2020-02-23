@@ -50,21 +50,24 @@ var findMin = function (nums) {
         return -1;
     }
     let left = 0, right = len - 1;
+    //如果nums长度为1 或 没有被旋转， 返回结果是nums[0]
     if (len == 1 || nums[right] > nums[0]) {
         return nums[0];
     }
-
+    //如果nums旋转了
+    //所有变化点左侧元素 > 数组第一个元素
+    //所有变化点右侧元素 < 数组第一个元素
     while (left < right) {
         let mid = left + Math.floor((right - left) / 2); //找到数组的中间元素 mid
-        if (nums[mid] > nums[mid + 1]) {
+        if (nums[mid] > nums[mid + 1]) { //如果中间元素后面的元素小于中间元素，则mid+1 就是最小值
             return nums[mid + 1];
         }
-        if (nums[mid - 1] > nums[mid]) {
+        if (nums[mid - 1] > nums[mid]) { //如果中间元素前面的元素大于中间元素，则mid 就是最小值
             return nums[mid];
         }
-        if (nums[mid] > nums[0]) {
+        if (nums[mid] > nums[0]) { //如果中间元素 > 数组第一个元素，我们需要在 mid 右边搜索变化点
             left = mid + 1;
-        } else {
+        } else { //如果中间元素 < 数组第一个元素，我们需要在 mid 做边搜索变化点。
             right = mid - 1;
         }
     }

@@ -121,34 +121,35 @@ right_depth=2
 执行let h = Math.max(left_depth, right_depth) + 1;
 h=3
 */
-var maxDepth1 = function (root) {
-    console.log(`maxDepth start`);
-    if (!root) {
-        return 0;
-    }
-    console.log(`root.val=${root.val}`);
-
-    //获取左子树的高度
-    let left_depth = maxDepth(root.left);
-    console.log(`left_depth=${left_depth}`);
-
-    //获取右子树的高度
-    let right_depth = maxDepth(root.right);
-    console.log(`right_depth=${right_depth}`);
-
-    //返回子树的根的高度
-    let h = Math.max(left_depth, right_depth) + 1;
-    console.log(`h=${h}`);
-    return h; 	 // return depth of the subtree rooted at root
-};
-// var maxDepth = function (root) {
+// var maxDepth1 = function (root) {
+//     console.log(`maxDepth start`);
 //     if (!root) {
 //         return 0;
 //     }
+//     console.log(`root.val=${root.val}`);
+
+//     //获取左子树的高度
 //     let left_depth = maxDepth(root.left);
+//     console.log(`left_depth=${left_depth}`);
+
+//     //获取右子树的高度
 //     let right_depth = maxDepth(root.right);
-//     return  Math.max(left_depth, right_depth) + 1;
+//     console.log(`right_depth=${right_depth}`);
+
+//     //返回子树的根的高度
+//     let h = Math.max(left_depth, right_depth) + 1;
+//     console.log(`h=${h}`);
+//     return h; 	 // return depth of the subtree rooted at root
 // };
+//递归：自底向上
+var maxDepth1 = function (root) {
+    if (!root) {
+        return 0;
+    }
+    let left_depth = maxDepth(root.left);
+    let right_depth = maxDepth(root.right);
+    return Math.max(left_depth, right_depth) + 1;
+};
 
 /*
 Accepted
@@ -204,20 +205,27 @@ queue = [root],queue.length ==1
     n = 3;
     queue = [] queue.length ==0
 */
-var maxDepth2 = function (root) {
-    if (!root) return 0
-    let queue = [root], n = 0
-    while (queue.length != 0) {
-        let arr = [];
-        while (queue.length) {
-            let curr = queue.shift()
-            if (curr.left) arr.push(curr.left)
-            if (curr.right) arr.push(curr.right)
-        }
-        n++
-        queue = arr
+// 使用 DFS 策略访问每个结点，同时在每次访问时更新最大深度
+var maxDepth = function (root) {
+    if (root == null) {
+        return 0;
     }
-    return n
+    let stack = [{ "key": root, "val": 1 }], depth = 0;
+    while (stack.length) {
+        let currObj = stack.pop(),
+            currNode = currObj.key;
+        if (currNode != null) {
+            let currNode_depth = currObj.val;
+            depth = Math.max(depth, currNode_depth);
+            if (currNode.left != null) {
+                stack.push({ "key": currNode.left, "val": currNode_depth + 1 });
+            }
+            if (currNode.right != null) {
+                stack.push({ "key": currNode.right, "val": currNode_depth + 1 });
+            }
+        }
+    }
+    return depth;
 }
 
 // @lc code=end

@@ -58,10 +58,11 @@ Accepted
 Your runtime beats 97.69 % of javascript submissions
 Your memory usage beats 88.54 % of javascript submissions (46.8 MB)
 */
-var reverseString = function (s) {
+var reverseString1 = function (s) {
     return s.reverse();
 };
 /*
+递归
 Accepted
 478/478 cases passed (136 ms)
 Your runtime beats 63.6 % of javascript submissions
@@ -71,13 +72,17 @@ var helper = function (str, left, right) {
     if (left >= right) {
         return;
     }
+
+    //2.就地交换前导字符和末尾字符
     let tmp = str[left];
-    str[left++] = str[right];
-    str[right--] = tmp;
-    return helper(str, left, right);
+    str[left] = str[right];
+    str[right] = tmp;
+    //3. 递归调用函数来反转剩余的字符串，也就是 reverseString(str[1...n-2]).
+    helper(str, left + 1, right - 1);
 }
 
-var reverseString1 = function (s) {
+var reverseString = function (s) {
+    //1.从输入字符串中获取前导字符和尾随字符，即 str[0] and str[n-1].
     helper(s, 0, s.length - 1);
 };
 // @lc code=end

@@ -43,25 +43,31 @@
  * @param {ListNode} head
  * @return {boolean}
  */
+/*
+最简单的方法就是将链表的值复制到数组列表中，再使用双指针法判断
+复制链表值到数组列表中。
+使用双指针法判断是否为回文。
+
+时间复杂度O(n)
+空间复杂度O(n)
+*/
 var isPalindrome = function (head) {
     let cur = head, tmp = [];
-    while (cur) {
+    while (cur != null) {
         tmp.push(cur.val);
         cur = cur.next;
     }
-    let len = tmp.length;
+    let len = tmp.length,
+        left = 0,
+        right = len - 1;
 
-    for (let i = 0; i < len; i++) {
-        let index = len - 1 - i;
-        if (index >= i) {
-            if (tmp[i] != tmp[index]) {
-                return false;
-            }
-        } else {
-            break;
+    while (left < right) {
+        if (tmp[left] != tmp[right]) {
+            return false;
         }
+        left++;
+        right--;
     }
-
     return true;
 };
 // @lc code=end

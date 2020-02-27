@@ -71,33 +71,6 @@ var inorderTraversal1 = function (root) {
     return res;
 };
 
-/*
-Accepted
-68/68 cases passed (68 ms)
-Your runtime beats 42.2 % of javascript submissions
-Your memory usage beats 70.07 % of javascript submissions (33.7 MB)
-*/
-var inorderTraversal2 = function (root) {
-    if (root == null) {
-        return [];
-    }
-    let curr = root, res = [], stack = [];
-
-    while (curr != null || stack.length != 0) {
-        //1. 查找要添加到res的节点
-        while (curr != null) {
-            stack.push(curr);
-            curr = curr.left;
-        }
-        curr = stack.pop();//删除并返回数组的最后一个元素
-        //2. 添加节点的值到res
-        res.push(curr.val);
-        //3. 跳转到下一个需要查找的树
-        curr = curr.right;
-    }
-    return res;
-};
-
 
 /*
 方法三：莫里斯遍历
@@ -155,7 +128,7 @@ Accepted
 Your runtime beats 98.46 % of javascript submissions
 Your memory usage beats 70.07 % of javascript submissions (33.7 MB)
 */
-var inorderTraversal = function (root) {
+var inorderTraversal2 = function (root) {
     if (root == null) {
         return [];
     }
@@ -179,5 +152,66 @@ var inorderTraversal = function (root) {
 
     return res;
 };
+/*
+DFS:深度优先搜索
+中序遍历--左根右
+Accepted
+68/68 cases passed (56 ms)
+Your runtime beats 94.67 % of javascript submissions
+Your memory usage beats 57.5 % of javascript submissions (33.8 MB)
+*/
+var inorderTraversal2 = function (root) {
+    if (root == null) {
+        return [];
+    }
+    let res = [], stack = [], curr = root;
+    while (curr != null || stack.length) {
+        while (curr != null) { // 把左子树的所有左节点入栈
+            stack.push(curr);
+            curr = curr.left;
+        }
+        curr = stack.pop();//左节点出栈
+        if (curr.val) {
+            res.push(curr.val);
+        }
+        curr = curr.right; // 当前节点的左节点和当前节点已经出栈， 计算右子树
+    }
+    return res;
+};
+
+//Other
+/*
+使用颜色标记节点的状态，新节点为白色，已访问的节点为灰色。
+如果遇到的节点为白色，则将其标记为灰色，然后将其右子节点、自身、左子节点依次入栈。
+如果遇到的节点为灰色，则将节点的值输出。
+Accepted
+68/68 cases passed (68 ms)
+Your runtime beats 42.72 % of javascript submissions
+Your memory usage beats 48.62 % of javascript submissions (33.8 MB)
+*/
+var inorderTraversal = function (root) {
+    let res = [], stack = [{ 'color': 'WHITE', 'node': root }];
+
+    while (stack.length) {
+        let ele = stack.pop(),
+            color = ele.color,
+            node = ele.node;
+        if (node != null) {
+            if (color == 'WHITE') {
+                if (node.right != null) {
+                    stack.push({ 'color': 'WHITE', 'node': node.right })
+                }
+                stack.push({ 'color': 'GRAY', 'node': node })
+                if (node.left != null) {
+                    stack.push({ 'color': 'WHITE', 'node': node.left })
+                }
+            } else {
+                res.push(node.val);
+            }
+        }
+    }
+    return res;
+};
+
 // @lc code=end
 

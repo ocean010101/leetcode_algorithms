@@ -38,6 +38,14 @@ Your runtime beats 92.62 % of javascript submissions
 Your memory usage beats 87.33 % of javascript submissions (38.2 MB)
 */
 // @lc code=start
+/**
+ * 
+ * @param {String[][]} arr 
+ * @param {Number} row 
+ * @param {Number} col 
+ * @param {String} word 
+ * @param {Number} index//记录要查找的单词中字母的索引 
+ */
 var dfs = function (arr, row, col, word, index) {
     // console.log(`row=${row}, col=${col}, index=${index}`);
     if (row < 0 ||
